@@ -1,0 +1,56 @@
+*{
+    margin: 0;
+    font-family: sans-serif;
+}
+
+header{
+    height: 10vh;
+    text-align: center;
+    font-size: 30px;
+}
+
+header h3{
+    padding-top: 20px;
+}
+
+.conn{
+    background: url(../img/mal_logo.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 90vh;
+}
+
+.con{
+    backdrop-filter: blur(5px);
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.content{
+    backdrop-filter: blur(8px);
+    height: 30vh;
+    width: 50%;
+    color: #fff;
+    text-align: center;
+}
+
+.content button{
+    padding: 10px;
+    font-size: 20px;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 2px solid #fff;
+    background-color: rgb(39, 57, 50);
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.con span{
+    font-size: 20px;
+}

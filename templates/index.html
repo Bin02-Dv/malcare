@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MalCare</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'img/m-logo.png' %}" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <h3>Maleria Care</h3>
+    </header>
+    <div class="conn">
+        <form method="post" class="con" id="form">
+            {% csrf_token %}
+            <div class="content">
+                <div id="text-container">
+                    <span id="animated-text">Infected</span>
+                </div>
+                <div class="btn">
+                    <button>Check</button>
+                </div>
+                <div class="row">
+                    <input type="file" name="img" accept=".png, .jpg, .jpeg">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="{% static 'js/JQ.js' %}"></script>
+<script>
+    $(document).on('submit', '#form', function (e){
+        e.preventDefault();
+        var formData = new FormData(this); // Pass 'this' instead of $(this)[0]
+        $.ajax({
+            type: 'POST',
+            url: '/',
+            data: formData,
+            processData: false, // Ensure data is not processed for FormData
+            contentType: false, // Ensure proper content type for FormData
+            success: function(response) {
+                var success = response['success'];
+                const textContainer = document.getElementById('text-container');
+                const animatedText = document.getElementById('animated-text');
+                const textToAnimate = response['message'];
+                const animationDelay = 50;
+                let letterIndex = 0;
+
+                function animateText() {
+                    if (letterIndex < textToAnimate.length) {
+                        animatedText.innerHTML += textToAnimate.charAt(letterIndex);
+                        letterIndex++;
+                        setTimeout(animateText, animationDelay);
+                    }
+                }
+
+                // Reset the text content before animation
+                animatedText.innerHTML = "";
+
+                //if (success) {
+                    // Add success class and remove failed class
+                    //textContainer.classList.remove("failed");
+                    //textContainer.classList.add("success");
+                //} else {
+                    // Add failed class and remove success class
+                    //textContainer.classList.remove("success");
+                    //textContainer.classList.add("failed");
+                //}
+
+                // Scroll to the top of the container with class "con"
+                //const con = document.querySelector('.conn');
+                //if (con) {
+                    //con.scrollTo({ top: 0, behavior: 'smooth' });
+                //}
+
+                // Start the text animation
+                animateText();
+            }
+        });
+    });
+</script>
+</body>
+</html>
